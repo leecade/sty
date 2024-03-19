@@ -8,7 +8,7 @@ documentation = "https://docs.rs/sty"
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/leecade/sty"
-keywords = ["cli", "color", "macro-based", "terminal", "ansi_term", "style"]
+keywords = ["cli", "color", "macro-based", "terminal", "ansi_term"]
 categories = ["command-line-interface"]
 
 [dependencies]
