@@ -4,7 +4,7 @@
 [![docs-rs](https://docs.rs/sty/badge.svg)](https://docs.rs/sty)
 ![Downloads](https://img.shields.io/crates/d/sty)
 
-Color terminal outputs in a minimal, macro-based, and dead simple way.
+Style terminal outputs in a minimal, macro-based, and dead simple way.
 
 ## Highlights
 
