@@ -1,0 +1,14 @@
+[package]
+name = "sty"
+version = "0.1.0"
+edition = "2018"
+description = "Color terminal outputs in a minimal, macro-based, and dead simple way."
+authors = ["leecade<leecade@163.com>"]
+documentation = "https://docs.rs/sty"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/leecade/sty"
+keywords = ["cli", "color", "macro-based", "terminal", "ansi_term", "style"]
+categories = ["command-line-interface"]
+
+[dependencies]
