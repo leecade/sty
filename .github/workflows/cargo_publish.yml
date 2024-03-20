@@ -1,0 +1,33 @@
+name: Cargo Publish
+
+on: 
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+      - name: Install cargo-edit
+        run: cargo install cargo-edit
+      - name: Update version in Cargo.toml
+        run: |
+          TAG=${GITHUB_REF/refs/tags//}
+          cargo add "sty^=$TAG"
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -am "Bump version to $TAG"
+      - name: Publish to crates.io
+        uses: pietroalbini/cargo-publish-all@v1
+        with:
+          token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
