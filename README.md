@@ -22,11 +22,12 @@
 
 ## Highlights
 
-- Macro-based: Increases compile-time efficiency and boosts safety.
-- Innovative Styling: Compose styles in an array-like format such as `[red, bold, underline]`.
-- Extensive Type Support: All types implementing `std::fmt::Display` trait are supported, offering wide-ranging adaptability.
-- Full Color and Style support: Modifiers / Foreground colors / Background colors / Bright foreground colors / Bright background colors.
-- Zero dependencies: Cleaner code-base with no third-party interference.
+- **Macro-based**: Increases compile-time efficiency and boosts safety.
+- **Innovative Styling**: Compose styles in an array-like format such as `[red, bold, underline]`.
+- **Extensive Type Support**: All types implementing `std::fmt::Display` trait are supported, offering wide-ranging adaptability.
+- **Full Color and Style support**: Modifiers / Foreground colors / Background colors / Bright foreground colors / Bright background colors.
+- **Zero dependencies**: Cleaner code-base with no third-party interference.
+- **Supports `tty` detection**: Avoids styling when the tty lacks color support, Use `set_color_enabled` for manual enable control.
 
 ## Documentation
 
@@ -38,7 +39,7 @@ This crate works with Cargo. Add the following to your Cargo.toml dependencies s
 
 ```toml
 [dependencies]
-sty = "0.2"
+sty = "0.3"
 ```
 
 ## Basic usage
@@ -61,7 +62,20 @@ println!("{}", sty!(123, [red, underline]));
 ```
 
 > [!TIP]
-> In style combinations, the styles that are specified later take precedence. For example:
+> If `tty` environment does not support color, default output will be printed without any styling, Use `set_color_enabled` for manual enable control, For example:
+
+```rust
+use sty::{ set_color_enabled, is_color_enabled, sty, style::* };
+let enabled = is_color_enabled();
+set_color_enabled(false);
+sty!("123", [red]); // no color
+set_color_enabled(true);
+sty!("123", [red]); // red
+set_color_enabled(enabled);
+```
+
+> [!TIP]
+> In style combinations, the styles that are specified later take precedence, For example:
 
 ```rust
 use sty::{ sty, style::* };

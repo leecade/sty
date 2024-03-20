@@ -4,9 +4,63 @@ pub mod sty;
 pub mod style;
 pub use style::*;
 
+use once_cell::sync::Lazy;
+use std::sync::RwLock;
+
+#[rustversion::since(1.70)]
+fn detect_tty_support() -> bool {
+    use std::io::IsTerminal;
+    std::io::stdout().is_terminal()
+}
+
+#[rustversion::before(1.70)]
+fn detect_tty_support() -> bool {
+    // TODO: Enhanced detection
+    if let Ok(term) = std::env::var("TERM") {
+        term.contains("color") || term.contains("256")
+    } else {
+        false
+    }
+}
+
+// pub static SUPPORTS_COLOR: Lazy<bool> = Lazy::new(|| detect_tty_support());
+static SUPPORTS_COLOR: Lazy<RwLock<bool>> = Lazy::new(|| RwLock::new(detect_tty_support()));
+
+pub fn set_color_enabled(enable: bool) {
+    let mut color_support = match SUPPORTS_COLOR.write() {
+        Ok(guard) => guard,
+        Err(_) => {
+            return;
+        }
+    };
+    *color_support = enable;
+}
+
+pub fn is_color_enabled() -> bool {
+    match SUPPORTS_COLOR.read() {
+        Ok(guard) => *guard,
+        Err(_) => false,
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+    // use once_cell::sync::Lazy;
+    // use std::sync::Mutex;
+    // static COLOR_SUPPORT_MUTEX: Lazy<Mutex<()>> = Lazy::new(|| Mutex::new(()));
+
+    #[test]
+    fn test_color_enable() {
+        // let _guard = COLOR_SUPPORT_MUTEX.lock().unwrap();
+        std::thread::sleep(std::time::Duration::from_millis(50));
+        let enabled = is_color_enabled();
+        set_color_enabled(true);
+        assert_eq!(sty!("123", [red]), "\u{1b}[31m123\u{1b}[39m");
+        set_color_enabled(false);
+        assert_eq!(sty!("123", [red]), "123");
+        set_color_enabled(enabled);
+    }
 
     #[test]
     fn test_basic_usage() {
