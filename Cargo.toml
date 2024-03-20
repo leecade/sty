@@ -1,6 +1,6 @@
 [package]
 name = "sty"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2018"
 description = "Color terminal outputs in a minimal, macro-based, and dead simple way."
 authors = ["leecade<leecade@163.com>"]
