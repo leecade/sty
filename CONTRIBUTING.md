@@ -8,22 +8,12 @@
 cargo test
 ```
 
-2. Get the lastest version
+2. Update the version in `Cargo.toml`
+
+3. Push the main branch to trigger the github actions
 
 ```bash
-git describe --tags $(git rev-list --tags --max-count=1)
-```
-
-3. Create a new version
-
-```bash
-git tag -a v0.2.0 -m "Your message"
-```
-
-4. Push the new version
-
-```bash
-git push origin v0.2.0
+git push origin main
 ```
 
 github actions will automatically publish the new version to crates.io
