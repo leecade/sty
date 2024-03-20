@@ -28,6 +28,6 @@ jobs:
           git config --local user.name "GitHub Action"
           git commit -am "Bump version to $TAG"
       - name: Publish to crates.io
-        uses: pietroalbini/cargo-publish-all@v1
+        uses: katyo/publish-crates@v2
         with:
-          token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+          registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
