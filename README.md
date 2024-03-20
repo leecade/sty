@@ -38,7 +38,7 @@ This crate works with Cargo. Add the following to your Cargo.toml dependencies s
 
 ```toml
 [dependencies]
-sty = "0.1"
+sty = "0.2"
 ```
 
 ## Basic usage
@@ -60,14 +60,27 @@ println!("{}", sty!("Hello world!", [red, underline]));
 println!("{}", sty!(123, [red, underline]));
 ```
 
-Note: According to the ASCII escape rules, the color at the front has the highest priority. For example:
+> [!TIP]
+> In style combinations, the styles that are specified later take precedence. For example:
 
 ```rust
-sty!("str", [red, green, blue]); // red
-sty!("str", [reset, red, underline]); // reset
+use sty::{ sty, style::* };
+sty!("str", [red, green, blue]); // blue
+sty!("str", [red, underline, reset]); // reset
 ```
 
-### Supported types
+### `sty!` Macro
+
+The `sty!` macro is a powerful utility conveniently used to apply a collection of style manipulations to your input. This macro allows you to seamlessly incorporate text properties with an intuitive syntax.
+
+```rust
+use sty::{ sty, style::{red, underline} };
+println!("{}", sty!("Hello world!", [red, underline]));
+```
+
+In this example, `red` and `underline` are both style transformations, and the sty! macro returns a newly styled text instance with all these styling elements applied. Multiple styles can be applied simultaneously, and the output will be a combination of all.
+
+### Supported input types
 
 For any type that has implemented the `std::fmt::Display` trait, like:
 
@@ -79,6 +92,8 @@ For any type that has implemented the `std::fmt::Display` trait, like:
 
 ### Supported styles
 
+use the following styles to style your input, like:
+
 ```rust
 use sty::{
     style::{red, underline},
@@ -88,48 +103,48 @@ use sty::{
 ```
 
 - Modifiers
-  - reset
-  - bold
-  - dim
-  - italic
-  - underline
-  - overline
-  - inverse
-  - hidden
-  - strikethrough
+  - `reset`
+  - `bold`
+  - `dim`
+  - `italic`
+  - `underline`
+  - `overline`
+  - `inverse`
+  - `hidden`
+  - `strikethrough`
 - Foreground colors
-  - black
-  - red
-  - green
-  - yellow
-  - blue
-  - magenta
-  - cyan
-  - white
-  - gray
+  - `black`
+  - `red`
+  - `green`
+  - `yellow`
+  - `blue`
+  - `magenta`
+  - `cyan`
+  - `white`
+  - `gray`
 - Background colors
-  - bg_black
-  - bg_red
-  - bg_green
-  - bg_yellow
-  - bg_blue
-  - bg_magenta
-  - bg_cyan
-  - bg_white
-  - bg_gray
+  - `bg_black`
+  - `bg_red`
+  - `bg_green`
+  - `bg_yellow`
+  - `bg_blue`
+  - `bg_magenta`
+  - `bg_cyan`
+  - `bg_white`
+  - `bg_gray`
 - Bright foreground colors
-  - red_bright
-  - green_bright
-  - yellow_bright
-  - blue_bright
-  - magenta_bright
-  - cyan_bright
-  - white_bright
+  - `red_bright`
+  - `green_bright`
+  - `yellow_bright`
+  - `blue_bright`
+  - `magenta_bright`
+  - `cyan_bright`
+  - `white_bright`
 - Bright background colors
-  - bg_red_bright
-  - bg_green_bright
-  - bg_yellow_bright
-  - bg_blue_bright
-  - bg_magenta_bright
-  - bg_cyan_bright
-  - bg_white_bright
+  - `bg_red_bright`
+  - `bg_green_bright`
+  - `bg_yellow_bright`
+  - `bg_blue_bright`
+  - `bg_magenta_bright`
+  - `bg_cyan_bright`
+  - `bg_white_bright`

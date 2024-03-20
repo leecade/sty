@@ -7,13 +7,30 @@ pub use style::*;
 #[cfg(test)]
 mod tests {
     use super::*;
+
     #[test]
     fn test_basic_usage() {
         assert_eq!(sty!("123", []), "123");
         assert_eq!(sty!("123", [red]), "\u{1b}[31m123\u{1b}[39m");
+    }
+    #[test]
+    fn test_combination_rules() {
+        assert_eq!(sty!("123", []), "123");
         assert_eq!(
-            sty!("123", [red, underline]),
-            "\u{1b}[4m\u{1b}[31m123\u{1b}[39m\u{1b}[24m"
+            sty!("123", [red, green]),
+            "\u{1b}[31m\u{1b}[32m123\u{1b}[39m\u{1b}[39m"
+        );
+        assert_eq!(
+            sty!("456", [red, underline]),
+            "\u{1b}[31m\u{1b}[4m456\u{1b}[24m\u{1b}[39m"
+        );
+        assert_eq!(
+            sty!("!reset", [reset, red, underline]),
+            "\u{1b}[0m\u{1b}[31m\u{1b}[4m!reset\u{1b}[24m\u{1b}[39m\u{1b}[0m"
+        );
+        assert_eq!(
+            sty!("reset", [red, underline, reset]),
+            "\u{1b}[31m\u{1b}[4m\u{1b}[0mreset\u{1b}[0m\u{1b}[24m\u{1b}[39m"
         );
     }
     #[test]
