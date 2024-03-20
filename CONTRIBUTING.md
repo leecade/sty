@@ -1,5 +1,15 @@
 # Contributing
 
+## Run examples
+
+```bash
+cargo run --example simple
+
+# Debug with macro expansion
+cargo install cargo-expand
+cargo expand --example simple
+```
+
 ## Setup to publish new version
 
 1. Test the code
