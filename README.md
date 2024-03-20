@@ -4,7 +4,21 @@
 [![docs-rs](https://docs.rs/sty/badge.svg)](https://docs.rs/sty)
 ![Downloads](https://img.shields.io/crates/d/sty)
 
-Style terminal outputs in a minimal, macro-based, and dead simple way.
+## $\mathbb{\color{red}{Style \ } \color{lightblue}{terminal}\ \color{black}{outputs \ }\color{gray}{\ in\ a} \color{magenta}{\ minimal}\color{gray}{,} \color{lightyellow}{\ macro\ based}\color{gray}{,}\ and \color{lightgreen}{\ dead\ simple} \color{gray}{\ way.}}$
+
+|                               |   Code    |  Backgroud   |      Bright      |  Bright background  |
+| ----------------------------- | :-------: | :----------: | :--------------: | :-----------------: |
+| $\mathbb{\color{black}{■}}$   |  `black`  |  `bg_black`  |                  |                     |
+| $\mathbb{\color{gray}{■}}$    |  `gray`   |  `bg_gray`   |                  |                     |
+| $\mathbb{\color{white}{■}}$   |  `white`  |  `bg_white`  |  `white_bright`  |  `bg_white_bright`  |
+| $\mathbb{\color{red}{■}}$     |   `red`   |   `bg_red`   |   `red_bright`   |   `bg_red_bright`   |
+| $\mathbb{\color{green}{■}}$   |  `green`  |  `bg_green`  |  `green_bright`  |  `bg_green_bright`  |
+| $\mathbb{\color{yellow}{■}}$  | `yellow`  | `bg_yellow`  |  `yello_bright`  | `bg_yellow_bright`  |
+| $\mathbb{\color{blue}{■}}$    |  `blue`   |  `bg_blue`   |  `blue_bright`   |  `bg_blue_bright`   |
+| $\mathbb{\color{magenta}{■}}$ | `magenta` | `bg_magenta` | `magenta_bright` | `bg_magenta_bright` |
+| $\mathbb{\color{cyan}{■}}$    |  `cyan`   |  `bg_cyan`   |  `cyan_bright`   |  `bg_cyan_bright`   |
+
+> **`bold`** _`italic`_ <ins>`underline`</ins> <s>`strikethrough`</s> `overline` `dim` `inverse` `hidden` `reset`
 
 ## Highlights
 
@@ -16,7 +30,7 @@ Style terminal outputs in a minimal, macro-based, and dead simple way.
 
 ## Documentation
 
-see [![docs-rs](https://docs.rs/sty/badge.svg)](https://docs.rs/sty)
+[![docs-rs](https://docs.rs/sty/badge.svg)](https://docs.rs/sty)
 
 ## Installation
 
@@ -40,6 +54,9 @@ use sty::{
 println!("{}", sty!("Hello world!", [red]));
 
 // multiple styles
+println!("{}", sty!("Hello world!", [red, underline]));
+
+// multiple input types
 println!("{}", sty!(123, [red, underline]));
 ```
 
