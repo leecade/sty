@@ -21,7 +21,7 @@ jobs:
       - name: Update version in Cargo.toml
         run: |
           TAG=${GITHUB_REF/refs/tags//}
-          cargo add "sty^=$TAG"
+          cargo add "sty=$TAG"
       - name: Commit changes
         run: |
           git config --local user.email "action@github.com"
