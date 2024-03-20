@@ -12,3 +12,10 @@ keywords = ["cli", "color", "macro-based", "terminal", "ansi_term"]
 categories = ["command-line-interface"]
 
 [dependencies]
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[bench]]
+name = "sty_macro"
+harness = false
