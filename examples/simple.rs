@@ -1,4 +1,7 @@
-use sty::{sty, style::red};
+use sty::{
+    sty,
+    style::{red, underline},
+};
 fn main() {
-    println!("{}", sty!("Hello world!", [red]));
+    println!("{} {}", sty!("Hello", [red]), underline("world!"));
 }

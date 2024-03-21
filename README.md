@@ -54,11 +54,24 @@ use sty::{
 
 println!("{}", sty!("Hello world!", [red]));
 
-// multiple styles
+// Use `sty!` macro for combination of multiple styles
 println!("{}", sty!("Hello world!", [red, underline]));
 
-// multiple input types
+// Use `sty!` macro for multiple input types
 println!("{}", sty!(123, [red, underline]));
+
+// Use style function is simple for `&str` input
+println!("{}", red("Hello world!"));
+println!("{}", underline(&red("Hello world!")));
+```
+
+> [!TIP]
+> In style combinations, the styles that are specified later take precedence, For example:
+
+```rust
+use sty::{ sty, style::* };
+sty!("str", [red, green, blue]); // blue
+sty!("str", [red, underline, reset]); // reset
 ```
 
 > [!TIP]
@@ -74,15 +87,6 @@ sty!("123", [red]); // red
 set_color_enabled(enabled);
 ```
 
-> [!TIP]
-> In style combinations, the styles that are specified later take precedence, For example:
-
-```rust
-use sty::{ sty, style::* };
-sty!("str", [red, green, blue]); // blue
-sty!("str", [red, underline, reset]); // reset
-```
-
 ### `sty!` Macro
 
 The `sty!` macro is a powerful utility conveniently used to apply a collection of style manipulations to your input. This macro allows you to seamlessly incorporate text properties with an intuitive syntax.
@@ -94,7 +98,7 @@ println!("{}", sty!("Hello world!", [red, underline]));
 
 In this example, `red` and `underline` are both style transformations, and the sty! macro returns a newly styled text instance with all these styling elements applied. Multiple styles can be applied simultaneously, and the output will be a combination of all.
 
-### Supported input types
+#### Supported input types
 
 For any type that has implemented the `std::fmt::Display` trait, like:
 
@@ -104,17 +108,27 @@ For any type that has implemented the `std::fmt::Display` trait, like:
 - `bool`
 - ...
 
-### Supported styles
+### Style function
 
-use the following styles to style your input, like:
+Each style function can be combine with `sty!` macro or used separately, for example:
 
 ```rust
 use sty::{
+    sty,
     style::{red, underline},
 };
 // or
-// use sty::{ red, underline };
+// use sty::{ sty, red, underline };
+
+sty!("Hello world!", [red, underline]);
+// or
+red("Hello world!");
 ```
+
+> [!TIP]
+> The standalone style function only supports `&str` input type.
+
+All style functions are as follows:
 
 - Modifiers
   - `reset`
@@ -155,6 +169,7 @@ use sty::{
   - `cyan_bright`
   - `white_bright`
 - Bright background colors
+
   - `bg_red_bright`
   - `bg_green_bright`
   - `bg_yellow_bright`
@@ -162,3 +177,7 @@ use sty::{
   - `bg_magenta_bright`
   - `bg_cyan_bright`
   - `bg_white_bright`
+
+## Contribution
+
+[CONTRIBUTING](CONTRIBUTING.md)

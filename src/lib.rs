@@ -67,6 +67,16 @@ mod tests {
         assert_eq!(sty!("123", []), "123");
         assert_eq!(sty!("123", [red]), "\u{1b}[31m123\u{1b}[39m");
     }
+
+    #[test]
+    fn test_standlone_rules() {
+        assert_eq!(red("red"), "\u{1b}[31mred\u{1b}[39m");
+        assert_eq!(
+            red(&underline("red")),
+            "\u{1b}[31m\u{1b}[4mred\u{1b}[24m\u{1b}[39m"
+        );
+    }
+
     #[test]
     fn test_combination_rules() {
         assert_eq!(sty!("123", []), "123");
